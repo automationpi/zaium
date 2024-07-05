@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20-bookworm-slim
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -31,7 +31,7 @@ RUN npm install -g @techdocs/cli
 RUN find /usr/lib -name "EXTERNALLY-MANAGED" -exec rm -rf {} \;
 
 RUN python3 -m pip install mkdocs-techdocs-core
-RUN python3 -m pip install mkdocs-kroki-plugin
+RUN python3 -m pip install mkdocs-kroki-plugin==0.8.0
 RUN python3 -m pip install cookiecutter
 RUN python3 -m pip install mkdocs-awesome-pages-plugin
 
@@ -46,3 +46,4 @@ ENV NODE_ENV production
 
 # Set the default command to run when a container is started
 CMD ["node"]
+
